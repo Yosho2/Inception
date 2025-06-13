@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Par sécurité, on attend que MariaDB soit prêt (mieux que sleep 10 = un vrai check, si besoin je peux te le faire)
+# Attendre que MariaDB soit prêt
 sleep 10
 
-# Créer le dossier /run/php si nécessaire (sinon PHP-FPM plante)
+# Créer le dossier /run/php si nécessaire
 [ -d /run/php ] || mkdir -p /run/php
 
 # Vérifier si wp-config.php existe déjà
@@ -15,6 +15,14 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
                      --dbpass="$SQL_PASSWORD" \
                      --dbhost="mariadb:3306" \
                      --path="/var/www/wordpress"
+    wp core download --allow-root
+    wp core install --skip-email \
+                    --allow-root \
+                    --url="$DOMAIN_NAME" \
+                    --title="$WP_TITLE" \
+                    --admin_user="$WP_ADMIN_USR" \
+                    --admin_password="$WP_ADMIN_PWD" \
+                    --admin_email="$WP_ADMIN_EMAIL"
 else
     echo "wp-config.php déjà présent, rien à faire."
 fi
