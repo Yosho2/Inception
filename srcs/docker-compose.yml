@@ -49,9 +49,19 @@ services:
       - "9000"
 
 volumes:
-  mariadb:
   wordpress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/cogarcia/data/wordpress'
+  mariadb:
+    driver: local
+    driver_opts:
+      type: 'none' 
+      o: 'bind'
+      device: '/home/cogarcia/data/mariadb'
 
 networks:
   inception:
-
+    driver: bridge

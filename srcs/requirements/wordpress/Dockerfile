@@ -15,7 +15,6 @@ RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 COPY conf/auto_config.sh /auto_config.sh
 RUN chmod +x /auto_config.sh
-
 RUN	chown -R root:root /var/www/wordpress
 
 ENTRYPOINT ["/auto_config.sh"]
