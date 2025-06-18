@@ -5,7 +5,7 @@ services:
       context: requirements/mariadb
       dockerfile: Dockerfile
     env_file: .env
-    environment:           # <-- ici, sous le service mariadb
+    environment:
       MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${SQL_DATABASE}
       MYSQL_USER: ${SQL_USER}

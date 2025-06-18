@@ -41,6 +41,8 @@ fi
 
 wp option update siteurl "https://$DOMAIN_NAME" --allow-root
 wp option update home "https://$DOMAIN_NAME" --allow-root
+wp config set FORCE_SSL_ADMIN true --raw --type=constant --allow-root
+wp search-replace 'http://cogarcia.42.fr' 'https://cogarcia.42.fr' --allow-root
 
 # Start PHP-FPM
 /usr/sbin/php-fpm7.4 -F
